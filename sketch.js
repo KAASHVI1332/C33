@@ -93,11 +93,15 @@ function mouseReleased(){
 }
 
 function keyPressed(){
-    if(keyCode === 32){
-       // slingshot.attach(bird.body);
+    if(keyCode === 32 && bird.body.speed<1){
+       bird.trajectory=[]; 
+       Matter.Body.setPosition(bird.body,{x:200,y:50});
+       Matter.Body.setAngle(bird.body,0);
+        slingshot.attach(bird.body);
+        gameState="onSling";
     }
 }
-
+//calling if statment and reset function 
 async function getBackgroundImg(){
     var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
     var responseJSON = await response.json();
@@ -115,3 +119,6 @@ async function getBackgroundImg(){
     backgroundImg = loadImage(bg);
     console.log(backgroundImg);
 }
+//defining reset function 
+//if pig.visiblity less then pr equal to 0 then call funtion  reset..
+//setting visbilyty,score and postions(functon reset)
